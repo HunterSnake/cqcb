@@ -1,6 +1,6 @@
 SHOW ENGINE INNODB STATUS;
 
-drop table tb_page_type
+drop table tb_page_type;
 create table tb_page_type (id int not null,
 						  ename varchar(255) not null unique,
                           cname varchar(255) not null unique,
@@ -20,11 +20,15 @@ create table tb_sources ( id int not null auto_increment,
                           primary key (id),
                           constraint foreign key(typeId) references tb_page_type(id)
                           ON DELETE  RESTRICT  ON UPDATE CASCADE);
-                                                  
+ 
+ alter table tb_sources add spiderFlag boolean;
+ alter table tb_sources drop column spiderFlag;
+ alter table tb_sources add spiderFlag boolean default false;
 
 describe tb_sources;
 select * from tb_sources;
-                          
+
+drop table tb_titles;                          
 create table tb_titles (id int not null auto_increment,
 						typeId int not null,
 						title varchar(255) not null,
